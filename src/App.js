@@ -1,65 +1,47 @@
 import React, {Component} from 'react';
-import './App.css';
+import {BrowserRouter,Route} from 'react-router-dom'
 
-import {createStore} from 'redux'
+import About from './components/about'
+import Contact  from './components/contact'
+import Profile2 from './components/profile'
+import Navbar from './components/Navbar'
+import Home from './components/home'
+import Login from './components/Login'
+import Register from './components/register'
+
+
+
 
 class App extends Component {
   render(){
 
-    const reducer = (state={},action) =>{
-      if(action.type==="A")
-      {
-        console.log("a is called");
-        
-        return {
-          ...state,
-          A: "Thi is A state called"
-        }
-
-      }
-      else if(action.type==="C")
-      {
-        return {
-          ...state,
-          B: "This is state B"
-        }
-      }
-      else
-      {
-
-      return state;
-      }
-
-    }
-    //already created a store 
-    const central_store = createStore(reducer)
-
-    //we have to use the subscriber to different component to access the central storage
-
-    central_store.subscribe(()=>{
-      console.log(central_store.getState())
-    })
-
-
-    central_store.dispatch({type:"A"})
-    central_store.dispatch({type:"B"})
-    central_store.dispatch({type:"C"})
-    central_store.dispatch({type:"D"})
-
-
-
-
-    
-    
     return (
-    <div className="App">
-      <h5>clean app</h5>
-      <hr/>
-    </div>
+
+    
+       <BrowserRouter>
+        <div className="container">
+            <h5>clean app</h5>
+            <hr/>
+              <Navbar/>
+            <hr/>
+           
+            <Route exact path="/profile" component = {Profile2}/>
+            <Route exact path="/about" component = {About}/>
+            <Route exact path="/contact" component = {Contact}/>
+            <Route exact path="/login" component = {Login}/>
+            <Route exact path="/register" component = {Register}/>
+            <Route exact path="/" component = {Home}/>
+
+
+          </div>
+       </BrowserRouter>
+
+     
+
   );
 
 }
-  
+   
 }
 
 export default App;
