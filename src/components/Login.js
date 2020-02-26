@@ -1,12 +1,17 @@
 import React, { Component } from "react"
+import {connect} from 'react-redux'
+import {login} from '../store/actions/authActions'
 
 class Login extends Component{
 
     state = {
         username: '',
         password: '',
-        error :{}
+        error :{},
+        user :{}
     }
+
+    
 
     changeHandler = event => {
         //console.log(this.state)
@@ -17,6 +22,11 @@ class Login extends Component{
 
     submitHandler = event =>{
         event.preventDefault();
+        this.props.login({
+            username:this.props.username,
+            password: this.props.password
+
+        }, this.props.history)
     }
 
     render(){
@@ -47,7 +57,7 @@ class Login extends Component{
                                     />
                             </div>
                           
-                            <button type="submit" className="btn btn-primary">Register Now</button>
+                            <button type="submit" className="btn btn-primary">=login Now</button>
                     </form>
                     <hr>
                     </hr>
@@ -58,4 +68,8 @@ class Login extends Component{
     }
 }
 
-export default Login
+const mapStateToProps = state =>({
+    auth:state.auth
+})
+
+export default connect(mapStateToProps,{login})(Login)

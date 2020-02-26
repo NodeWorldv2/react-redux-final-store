@@ -9,8 +9,11 @@ class Register extends Component{
         email: '',
         username: '',
         password: '',
-        error :{}
+        error :{},
+     
     }
+
+    
 
     changeHandler = event => {
         //console.log(this.state)
@@ -23,16 +26,18 @@ class Register extends Component{
         event.preventDefault()
         let { username, email, password} = this.state
 
-        this.props.register({username, email, password})
+        this.props.register({username, email, password}, this.props.history)
         
     }
 
     render(){
         let {name, email, username, password} = this.state
+        //console.log(this.props)
         return(
             <div className="container">
                 <div className="col-md-3">
                     <h1>Register </h1>
+      
                     <form method="post" onSubmit={this.submitHandler}>
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
